@@ -248,6 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e3eb7eed86f4648a3a3384e1f826e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  leftArrowButton: {fileID: 0}
+  rightArrowButton: {fileID: 0}
 --- !u!1 &6978189822328210542
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e3eb7eed86f4648a3a3384e1f826e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  highlightColor: {r: 0, g: 0, b: 0, a: 0}
+  leftArrowButton: {fileID: 0}
+  rightArrowButton: {fileID: 0}
 --- !u!1 &7397471159329776256
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +440,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e3eb7eed86f4648a3a3384e1f826e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: {fileID: 8418992822253723217}
+  backgroundImage: {fileID: 4209447067570017323}
+  highlightColor: {r: 0.5139843, g: 0.23970564, b: 0.9528302, a: 1}
+  leftArrowButton: {fileID: 6507125259543980418}
+  rightArrowButton: {fileID: 6978189822328210542}
 --- !u!1 &7406900975090254841
 GameObject:
   m_ObjectHideFlags: 0
