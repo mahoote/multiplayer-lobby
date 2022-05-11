@@ -9,6 +9,11 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerPrefabs;
     
+    /** TODO:
+         * Do not reset images when new player joins.
+         * Show name.
+         * Find another way of printing avatars than using prefabs.
+    **/
     private void Start()
     {
         GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
