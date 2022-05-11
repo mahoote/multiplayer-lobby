@@ -1,16 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEditor.Build.Player;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
 
     public TMP_InputField roomInputField;
-    public GameObject lobbyPanel;
-    public GameObject roomPanel;
+    public GameObject lobbyPanel, roomPanel, playButton;
     public TMP_Text roomName;
     
     public RoomItem roomItemPrefab;
@@ -23,11 +24,26 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
+    
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.JoinLobby();
+    }
+
+    private void Update()
+    {
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            playButton.SetActive(true);
+        }
+        else
+        {
+            playButton.SetActive(false);
+        }
     }
 
     public void OnClickCreate()
@@ -132,5 +148,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         UpdatePlayerList();
+    }
+
+    public void OnClickPlayButton()
+    {
+        PhotonNetwork.LoadLevel("Game");
     }
 }
