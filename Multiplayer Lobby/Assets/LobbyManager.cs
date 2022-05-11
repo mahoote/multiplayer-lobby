@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using UnityEditor.Build.Player;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
