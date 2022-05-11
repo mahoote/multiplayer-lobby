@@ -17,14 +17,6 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public Sprite[] avatars;
 
     private Player player;
-    
-    
-    private void Awake()
-    {
-        playerProperties["name"] = "Petter";
-        playerProperties["age"] = 15;
-        print(playerProperties["name"]);
-    }
 
     public void SetPlayerInfo(Player _player)
     {
