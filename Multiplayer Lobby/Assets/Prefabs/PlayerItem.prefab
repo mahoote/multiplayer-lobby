@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 4094044400085773634}
   backgroundImage: {fileID: 8533273610723731256}
-  highlightColor: {r: 0.5139843, g: 0.23970564, b: 0.9528302, a: 1}
+  highlightColor: {r: 0.940251, g: 0.83396226, b: 1, a: 1}
   leftArrowButton: {fileID: 1606449297465940625}
   rightArrowButton: {fileID: 8775781530103047109}
   playerAvatar: {fileID: 8533273610723731256}

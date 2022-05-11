@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public float timeBetweenUpdates = 1.5f;
     private float nextUpdateTime;
 
-    public List<PlayerItem> playerItemsList = new List<PlayerItem>();
+    private List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
     
