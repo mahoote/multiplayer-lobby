@@ -10,7 +10,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Start()
     {
-        int randomNumber = Random.Range(0, spawnPoints.Length);
+        int randomNumber = Random.Range(0, spawnPoints.Length - 1);
         Transform spawnPoint = spawnPoints[randomNumber];
         GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, Quaternion.identity);
