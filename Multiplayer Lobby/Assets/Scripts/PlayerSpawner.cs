@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public GameObject[] playerPrefabs;
-    public Transform[] spawnPoints;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Sprite[] avatarSprites; 
     
-    public Transform playerItemParent;
-
     private void Start()
     {
-        int randomNumber = Random.Range(0, spawnPoints.Length - 1);
-        Transform spawnPoint = spawnPoints[randomNumber];
-        GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
-        PhotonNetwork.Instantiate(playerToSpawn.name, playerItemParent.position, Quaternion.identity);
+        GameObject playerToSpawn = playerPrefab;
+        SetUserDetails(playerToSpawn);
+        
+        PhotonNetwork.Instantiate(playerToSpawn.name, Vector3.zero, Quaternion.identity);
+    }
+
+    private void SetUserDetails(GameObject playerToSpawn)
+    {
+        playerToSpawn.GetComponentInChildren<Image>().sprite =
+            avatarSprites[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+        playerToSpawn.GetComponentInChildren<TMP_Text>().text = PhotonNetwork.LocalPlayer.NickName;
     }
 }

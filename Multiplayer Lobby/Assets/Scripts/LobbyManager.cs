@@ -21,8 +21,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private List<PlayerItem> playerItemsList = new List<PlayerItem>();
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
-    
-    
+
+    [SerializeField] private int minPlayers = 2;
+    [SerializeField] private byte maxPlayers = 20;
     
 
     // Start is called before the first frame update
@@ -33,7 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers)
         {
             playButton.SetActive(true);
         }
@@ -47,7 +48,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){MaxPlayers = 3, BroadcastPropsChangeToAll = true});
+            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){MaxPlayers = maxPlayers, BroadcastPropsChangeToAll = true});
         }
     }
 
@@ -71,8 +72,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void UpdateRoomList(List<RoomInfo> list)
     {
-        print("Is called");
-        
         foreach (var item in roomItemList)
         {
             Destroy(item.gameObject);
@@ -81,8 +80,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         foreach (var room in list)
         {
-            print(room.Name);
-            
             RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
             newRoom.SetRoomName(room.Name);
             roomItemList.Add(newRoom);
