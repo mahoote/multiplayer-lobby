@@ -7,21 +7,11 @@ using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private Sprite[] avatarSprites; 
+    [SerializeField] private GameObject[] playerPrefabs;
     
     private void Start()
     {
-        GameObject playerToSpawn = playerPrefab;
-        SetUserDetails(playerToSpawn);
-        
+        GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         PhotonNetwork.Instantiate(playerToSpawn.name, Vector3.zero, Quaternion.identity);
-    }
-
-    private void SetUserDetails(GameObject playerToSpawn)
-    {
-        playerToSpawn.GetComponentInChildren<Image>().sprite =
-            avatarSprites[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
-        playerToSpawn.GetComponentInChildren<TMP_Text>().text = PhotonNetwork.LocalPlayer.NickName;
     }
 }
