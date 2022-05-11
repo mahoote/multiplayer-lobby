@@ -34,7 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){MaxPlayers = 3});
+            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){MaxPlayers = 3, BroadcastPropsChangeToAll = true});
         }
     }
 
