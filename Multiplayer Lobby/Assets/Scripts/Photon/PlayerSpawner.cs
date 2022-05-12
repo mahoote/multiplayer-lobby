@@ -33,6 +33,7 @@ namespace Photon
 
         public void OnClickTakeQuiz()
         {
+            PhotonNetwork.AutomaticallySyncScene = false;
             SceneManager.LoadScene("Quiz");
         }
     }

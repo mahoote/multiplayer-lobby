@@ -1,5 +1,7 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JsonToQuiz : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class JsonToQuiz : MonoBehaviour
  
     void Start()
     {
+     
         Quiz quizInJson = JsonUtility.FromJson<Quiz>(jsonFile.text);
 
         var q = quizInJson.quiz[0];
