@@ -16,7 +16,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public Image playerAvatar;
     public Sprite[] avatars;
 
-    public int index;
+    [HideInInspector] public int index;
     private Player player;
 
     public void SetPlayerInfo(Player _player)

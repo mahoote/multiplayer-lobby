@@ -25,7 +25,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private int minPlayers = 2;
     [SerializeField] private byte maxPlayers = 20;
-    
+
+    [SerializeField] private List<Sprite> avatars = new List<Sprite>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -135,14 +137,52 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
     
+    private void AddPlayerToList(Player newPlayer)
+    {
+        if (PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
+        newPlayerItem.SetPlayerInfo(newPlayer);
+        
+        if (newPlayer == PhotonNetwork.LocalPlayer)
+        {
+            newPlayerItem.ApplyLocalChanges();
+        }
+
+        newPlayerItem.index = newPlayer.ActorNumber;
+        
+        playerItemsList.Add(newPlayerItem);
+    }
+    
+    private void RemovePlayerFromList(Player removedPlayer)
+    {
+        if (PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        foreach (var playerItem in playerItemsList)
+        {
+            if (playerItem.index == removedPlayer.ActorNumber)
+            {
+                Destroy(playerItem.gameObject);
+                playerItemsList.Remove(playerItem);
+                return;
+            }
+        }
+    }
+    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        UpdatePlayerList();
+        AddPlayerToList(newPlayer);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        UpdatePlayerList();
+        RemovePlayerFromList(otherPlayer);
     }
 
     public void OnClickPlayButton()
