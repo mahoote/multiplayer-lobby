@@ -1,12 +1,14 @@
+using System;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class JsonToQuiz : MonoBehaviour
 {
     [SerializeField] private TextAsset jsonFile;
- 
+    
     [SerializeField] private TMP_Text questionNr;
     [SerializeField] private TMP_Text questionTxt;
     [SerializeField] private GameObject buttonContainer;
@@ -22,15 +24,33 @@ public class JsonToQuiz : MonoBehaviour
         questionNr.text = $"Question {q.id}";
         questionTxt.text = $"{q.name}";
 
-        foreach (var answer in q.answers)
+        for (int i = 0; i < q.answers.Length; i++)
         {
             var answerBtn = answerBtnPrefab;
-         
+            var correctAnswer = q.correct_answer == i;
+
             answerBtn.GetComponent<AnswerButton>().questionId = q.id;
-            answerBtn.GetComponent<AnswerButton>().answerName = answer;
-            answerBtn.GetComponent<AnswerButton>().isCorrect = false;
+            answerBtn.GetComponent<AnswerButton>().answerName = q.answers[i];
+            answerBtn.GetComponent<AnswerButton>().isCorrect = correctAnswer;
             
             Instantiate(answerBtn, buttonContainer.transform);
         }
+    }
+
+    public void DisplayAnswers()
+    {
+        foreach (Transform child in buttonContainer.transform)
+        {
+            var button = child.gameObject;
+            
+            if(button.GetComponent<AnswerButton>().isCorrect)
+                button.GetComponent<Image>().color = Color.green;
+        }
+        
+        foreach (var manager in buttonContainer.GetComponentsInChildren<AnswerManager>())
+        {
+            Destroy(manager);
+        }
+        
     }
 }

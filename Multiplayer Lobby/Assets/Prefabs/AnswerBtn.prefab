@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionId: 1
   answerName: Marina
-  isCorrect: 0
+  isCorrect: 1
 --- !u!114 &-5791863061272675955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,3 +296,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6948d4c0e2ee041a17136944f4cb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardBtnColor: {r: 0.19607843, g: 0.52156866, b: 0.7647059, a: 1}
