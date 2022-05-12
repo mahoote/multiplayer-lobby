@@ -16,12 +16,14 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public Image playerAvatar;
     public Sprite[] avatars;
 
+    public int index;
     private Player player;
 
     public void SetPlayerInfo(Player _player)
     {
         playerName.text = _player.NickName;
         player = _player;
+        index = player.ActorNumber;
         UpdatePlayerItem(player);
     }
 

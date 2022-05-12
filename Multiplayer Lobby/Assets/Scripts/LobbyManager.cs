@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -129,11 +130,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             {
                 newPlayerItem.ApplyLocalChanges();
             }
-            
+
             playerItemsList.Add(newPlayerItem);
         }
     }
-
+    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         UpdatePlayerList();
