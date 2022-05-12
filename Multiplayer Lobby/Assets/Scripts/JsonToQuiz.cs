@@ -9,10 +9,9 @@ public class JsonToQuiz : MonoBehaviour
  
     [SerializeField] private TMP_Text questionNr;
     [SerializeField] private TMP_Text questionTxt;
+    [SerializeField] private GameObject buttonContainer;
+    [SerializeField] private GameObject answerBtnPrefab;
     
-    [SerializeField] private TMP_Text[] answersTxt;
-    [SerializeField] private GameObject[] answerButtonObject;
- 
     void Start()
     {
      
@@ -23,13 +22,15 @@ public class JsonToQuiz : MonoBehaviour
         questionNr.text = $"Question {q.id}";
         questionTxt.text = $"{q.name}";
 
-        for (int i = 0; i < q.answers.Length; i++)
+        foreach (var answer in q.answers)
         {
-            if (q.answers[i] != null)
-            {
-                answerButtonObject[i].SetActive(true);
-                answersTxt[i].text = q.answers[i];
-            }
+            var answerBtn = answerBtnPrefab;
+         
+            answerBtn.GetComponent<AnswerButton>().questionId = q.id;
+            answerBtn.GetComponent<AnswerButton>().answerName = answer;
+            answerBtn.GetComponent<AnswerButton>().isCorrect = false;
+            
+            Instantiate(answerBtn, buttonContainer.transform);
         }
     }
 }
