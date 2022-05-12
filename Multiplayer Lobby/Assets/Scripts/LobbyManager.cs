@@ -187,6 +187,21 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
+        Debug.Log("Play");
+        
+        foreach (var playerItem in playerItemsList)
+        {
+            Debug.Log(playerItem);
+            
+            if (playerItem.index == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                PlayerEntity.id = PhotonNetwork.LocalPlayer.ActorNumber;
+                PlayerEntity.avatar = playerItem.playerAvatar.sprite;
+                PlayerEntity.nickName = PhotonNetwork.LocalPlayer.NickName;
+                PlayerEntity.sessionId = PhotonNetwork.CurrentRoom.Name;
+            }
+        }
+
         PhotonNetwork.LoadLevel("Game");
     }
 }

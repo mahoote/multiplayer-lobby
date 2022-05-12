@@ -18,5 +18,10 @@ public class PlayerSpawner : MonoBehaviour
     {
         GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         PhotonNetwork.Instantiate(playerToSpawn.name, Vector3.zero, Quaternion.identity);
+
+        Debug.Log(PlayerEntity.id);
+        Debug.Log(PlayerEntity.nickName);
+        Debug.Log(PlayerEntity.sessionId);
+        Debug.Log(PlayerEntity.avatar);
     }
 }
