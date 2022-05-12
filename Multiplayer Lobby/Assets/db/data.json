@@ -1,0 +1,15 @@
+﻿{
+    "quiz": [
+        {
+            "id": 1,
+            "name": "What is my name?",
+            "answers": [
+                "Jonas",
+                "Martin",
+                "Fredrik",
+                "Marina"
+            ],
+            "correct_answer": 2
+        }
+    ]
+}
