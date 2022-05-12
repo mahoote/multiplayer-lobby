@@ -1371,7 +1371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000043835546}
+  m_AnchoredPosition: {x: 0, y: 0.00013152823}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1131186004
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 227141426}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.999825
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1603,18 +1603,8 @@ MonoBehaviour:
   timeBetweenUpdates: 1.5
   playerItemPrefab: {fileID: 4840375798240375549, guid: e1c7e05c5f3ec4844aedea4add5c5acb, type: 3}
   playerItemParent: {fileID: 1631345027}
-  minPlayers: 2
+  minPlayers: 1
   maxPlayers: 20
-  avatars:
-  - {fileID: 21300000, guid: 71b7062edd99dfe4d9a2af5362ff37fc, type: 3}
-  - {fileID: 21300000, guid: 1c09a17a996b9f34f864468953aa47a6, type: 3}
-  - {fileID: 21300000, guid: 72c40374e04b855488da9894a0c2a94a, type: 3}
-  - {fileID: 21300000, guid: e2b824ae775ec64478bd94b94402bb8f, type: 3}
-  - {fileID: 21300000, guid: b23c873acc848f44382ab20d6d08daf5, type: 3}
-  - {fileID: 21300000, guid: cfb35d188b093a545b49e3efb06ba204, type: 3}
-  - {fileID: 21300000, guid: 717225f60080b5649925b5b402301569, type: 3}
-  - {fileID: 21300000, guid: 2e1db1e73a0b42c489f79b736b959495, type: 3}
-  - {fileID: 21300000, guid: fd00f96d78b1e914582aa36057250105, type: 3}
 --- !u!4 &1297142269
 Transform:
   m_ObjectHideFlags: 0
