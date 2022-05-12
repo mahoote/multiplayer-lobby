@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerPrefabs;
+    [SerializeField] private Sprite[] playerAvatars;
     
     /** TODO:
          * Do not reset images when new player joins.
@@ -19,6 +20,11 @@ public class PlayerSpawner : MonoBehaviour
         GameObject playerToSpawn = playerPrefabs[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         PhotonNetwork.Instantiate(playerToSpawn.name, Vector3.zero, Quaternion.identity);
 
+        PlayerEntity.id = PhotonNetwork.LocalPlayer.ActorNumber;
+        PlayerEntity.avatar = playerAvatars[(int) PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
+        PlayerEntity.nickName = PhotonNetwork.LocalPlayer.NickName;
+        PlayerEntity.sessionId = PhotonNetwork.CurrentRoom.Name;
+        
         Debug.Log(PlayerEntity.id);
         Debug.Log(PlayerEntity.nickName);
         Debug.Log(PlayerEntity.sessionId);

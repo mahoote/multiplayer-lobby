@@ -26,9 +26,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private int minPlayers = 2;
     [SerializeField] private byte maxPlayers = 20;
 
-    [SerializeField] private List<Sprite> avatars = new List<Sprite>();
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -187,21 +184,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickPlayButton()
     {
-        Debug.Log("Play");
-        
-        foreach (var playerItem in playerItemsList)
-        {
-            Debug.Log(playerItem);
-            
-            if (playerItem.index == PhotonNetwork.LocalPlayer.ActorNumber)
-            {
-                PlayerEntity.id = PhotonNetwork.LocalPlayer.ActorNumber;
-                PlayerEntity.avatar = playerItem.playerAvatar.sprite;
-                PlayerEntity.nickName = PhotonNetwork.LocalPlayer.NickName;
-                PlayerEntity.sessionId = PhotonNetwork.CurrentRoom.Name;
-            }
-        }
-
         PhotonNetwork.LoadLevel("Game");
     }
 }
