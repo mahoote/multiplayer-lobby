@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class AnswerManager : MonoBehaviour
 {
-    private JsonToQuiz quizManager;
+    private QuizHandler _quizHandlerManager;
     [SerializeField] private Color standardBtnColor;
 
     private Image btnImage;
     private void Start()
     {
         btnImage = GetComponent<Image>();
-        quizManager = GameObject.Find("QuizHandler").GetComponent<JsonToQuiz>();
+        _quizHandlerManager = GameObject.Find("QuizHandler").GetComponent<QuizHandler>();
         
         btnImage.color = standardBtnColor;
     }
@@ -20,7 +20,7 @@ public class AnswerManager : MonoBehaviour
         if(!GetComponent<AnswerButton>().isCorrect)
             btnImage.color = Color.red;
         
-        quizManager.DisplayAnswers();
+        _quizHandlerManager.DisplayAnswers();
     }
 
 }

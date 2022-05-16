@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Photon
 {
     public class LobbyManager : MonoBehaviourPunCallbacks
     {
 
-        public TMP_InputField roomInputField;
-        public GameObject lobbyPanel, roomPanel, playButton;
+        public GameObject loadingPanel, roomPanel, playButton;
         public TMP_Text roomName;
     
         public RoomItem roomItemPrefab;
@@ -27,9 +29,12 @@ namespace Photon
         [SerializeField] private int minPlayers = 2;
         [SerializeField] private byte maxPlayers = 20;
 
+        [SerializeField] private bool createGroup;
+
         // Start is called before the first frame update
         void Start()
         {
+            createGroup = Convert.ToBoolean(PlayerPrefs.GetInt("CreateGroup"));
             PhotonNetwork.JoinLobby();
         }
 
@@ -45,19 +50,37 @@ namespace Photon
             }
         }
 
-        public void OnClickCreate()
+        public override void OnJoinedLobby()
         {
-            if (roomInputField.text.Length >= 1)
+            if (createGroup)
             {
-                PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions(){MaxPlayers = maxPlayers, BroadcastPropsChangeToAll = true});
+                var sessionIdInt = Random.Range(1000000, 9999999);
+                var sessionIdString = sessionIdInt.ToString();
+                var groupCode = sessionIdString.Insert(3, " ");
+        
+                OnClickCreate(groupCode);
             }
+            else
+            {
+                // loadingPanel.SetActive(false);
+                // lobbyPanel.SetActive(true);
+                JoinRoom(PlayerPrefs.GetString("GroupCode"));
+            }
+        }
+
+        public void OnClickCreate(string _roomName = "test")
+        {
+            // if (roomInputField.text.Length >= 1)
+            // {
+                PhotonNetwork.CreateRoom(_roomName, new RoomOptions(){MaxPlayers = maxPlayers, BroadcastPropsChangeToAll = true});
+            // }
         }
 
         public override void OnJoinedRoom()
         {
-            lobbyPanel.SetActive(false);
+            loadingPanel.SetActive(false);
             roomPanel.SetActive(true);
-            roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
+            roomName.text = "Your group code is:\n" + PhotonNetwork.CurrentRoom.Name;
             UpdatePlayerList();
         }
 
@@ -94,13 +117,12 @@ namespace Photon
 
         public void OnClickLeaveRoom()
         {
-            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
         }
 
-        public override void OnLeftRoom()
+        public override void OnDisconnected(DisconnectCause cause)
         {
-            roomPanel.SetActive(false);
-            lobbyPanel.SetActive(true);
+            SceneManager.LoadScene("Main");
         }
 
         public override void OnConnectedToMaster()

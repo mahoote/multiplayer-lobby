@@ -1,11 +1,8 @@
-using System;
-using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class JsonToQuiz : MonoBehaviour
+public class QuizHandler : MonoBehaviour
 {
     [SerializeField] private TextAsset jsonFile;
     
