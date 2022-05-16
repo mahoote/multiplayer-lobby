@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -12,12 +13,13 @@ namespace Photon
     public class LobbyManager : MonoBehaviourPunCallbacks
     {
 
-        public GameObject loadingPanel, roomPanel, playButton;
+        public GameObject loadingPanel, roomPanel, errorScreen, playButton;
         public TMP_Text roomName;
     
         public RoomItem roomItemPrefab;
         private List<RoomItem> roomItemList = new List<RoomItem>();
         public Transform contentObject;
+        private List<RoomInfo> roomInfolist = new List<RoomInfo>();
 
         public float timeBetweenUpdates = 1.5f;
         private float nextUpdateTime;
@@ -64,7 +66,25 @@ namespace Photon
             {
                 // loadingPanel.SetActive(false);
                 // lobbyPanel.SetActive(true);
-                JoinRoom(PlayerPrefs.GetString("GroupCode"));
+
+                var groupCode = PlayerPrefs.GetString("GroupCode");
+
+                var roomExists = false;
+                
+                foreach (var room in roomInfolist.Where(room => room.Name == groupCode))
+                {
+                    roomExists = true;
+                }
+                
+                if (roomExists)
+                {
+                    JoinRoom(groupCode);
+                }
+                else
+                {
+                    loadingPanel.SetActive(false);
+                    errorScreen.SetActive(true);
+                }
             }
         }
 
@@ -96,6 +116,8 @@ namespace Photon
 
         void UpdateRoomList(List<RoomInfo> list)
         {
+            roomInfolist = list;
+
             foreach (var item in roomItemList)
             {
                 Destroy(item.gameObject);
@@ -208,6 +230,11 @@ namespace Photon
         public void OnClickPlayButton()
         {
             PhotonNetwork.LoadLevel("Game");
+        }
+
+        public void OnClickTryAgain()
+        {
+            PhotonNetwork.Disconnect();
         }
     }
 }

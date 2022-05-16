@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,34 @@ namespace Photon
         public TMP_InputField joinNameInput;
         public TMP_InputField groupCodeInput;
         public TMP_Text buttonText;
+
+        [SerializeField] private int codeCharacterLimit = 8;
+        [SerializeField] private int codeSpace = 3;
+        
+        
+        private void Start()
+        {
+            groupCodeInput.characterLimit = codeCharacterLimit;
+
+        }
+
+        private void Update()
+        {
+            AddCharSpace();
+        }
+
+        private void AddCharSpace()
+        {
+            if (groupCodeInput.text.Contains(" ") || groupCodeInput.text.Length <= codeSpace) return;
+
+            var code = groupCodeInput.text;
+            var codeWithSpace = code.Insert(codeSpace, " ");
+
+            groupCodeInput.text = codeWithSpace;
+
+            groupCodeInput.caretPosition = groupCodeInput.text.Length;
+            groupCodeInput.ForceLabelUpdate();
+        }
 
         public void OnClickConnect(bool createGroup)
         {
@@ -40,5 +69,6 @@ namespace Photon
         {
             SceneManager.LoadScene("Lobby");
         }
+
     }
 }

@@ -1494,9 +1494,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createNameInput: {fileID: 885645154}
-  joinNameInput: {fileID: 1276778586}
-  groupCodeInput: {fileID: 0}
+  joinNameInput: {fileID: 1011442161}
+  groupCodeInput: {fileID: 346489105}
   buttonText: {fileID: 563207863}
+  codeCharacterLimit: 8
+  codeSpace: 3
 --- !u!4 &794241016
 Transform:
   m_ObjectHideFlags: 0
