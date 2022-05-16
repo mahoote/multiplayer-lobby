@@ -687,7 +687,7 @@ MonoBehaviour:
   m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 120
-  m_CharacterLimit: 0
+  m_CharacterLimit: 7
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1496,8 +1496,6 @@ MonoBehaviour:
   joinNameInput: {fileID: 1011442161}
   groupCodeInput: {fileID: 346489105}
   buttonText: {fileID: 563207863}
-  codeCharacterLimit: 8
-  codeSpace: 3
 --- !u!4 &794241016
 Transform:
   m_ObjectHideFlags: 0
