@@ -31,12 +31,17 @@ namespace Photon
         [SerializeField] private int minPlayers = 2;
         [SerializeField] private byte maxPlayers = 20;
 
-        [SerializeField] private bool createGroup;
+        private bool createGroup;
+        [SerializeField] private string groupCode;
 
         // Start is called before the first frame update
         void Start()
         {
             createGroup = Convert.ToBoolean(PlayerPrefs.GetInt("CreateGroup"));
+            
+            groupCode = PlayerPrefs.GetString("GroupCode");
+            groupCode = groupCode.Replace(" ", String.Empty);
+            
             PhotonNetwork.JoinLobby();
         }
 
@@ -52,30 +57,25 @@ namespace Photon
             }
         }
 
-        public override void OnJoinedLobby()
+        private void GoToRoom()
         {
             if (createGroup)
             {
                 var sessionIdInt = Random.Range(1000000, 9999999);
                 var sessionIdString = sessionIdInt.ToString();
-                var groupCode = sessionIdString.Insert(3, " ");
-        
-                OnClickCreate(groupCode);
+                OnClickCreate(sessionIdString);
             }
             else
             {
-                // loadingPanel.SetActive(false);
-                // lobbyPanel.SetActive(true);
-
-                var groupCode = PlayerPrefs.GetString("GroupCode");
-
                 var roomExists = false;
-                
+
+                Debug.Log(roomInfolist.Count);
+
                 foreach (var room in roomInfolist.Where(room => room.Name == groupCode))
                 {
                     roomExists = true;
                 }
-                
+
                 if (roomExists)
                 {
                     JoinRoom(groupCode);
@@ -88,7 +88,7 @@ namespace Photon
             }
         }
 
-        public void OnClickCreate(string _roomName = "test")
+        public void OnClickCreate(string _roomName = "0000000")
         {
             // if (roomInputField.text.Length >= 1)
             // {
@@ -100,7 +100,7 @@ namespace Photon
         {
             loadingPanel.SetActive(false);
             roomPanel.SetActive(true);
-            roomName.text = "Your group code is:\n" + PhotonNetwork.CurrentRoom.Name;
+            roomName.text = "Your group code is:\n" + PhotonNetwork.CurrentRoom.Name.Insert(3, " ");
             UpdatePlayerList();
         }
 
@@ -110,12 +110,16 @@ namespace Photon
             {
                 UpdateRoomList(roomList);
                 nextUpdateTime = Time.time + timeBetweenUpdates;
+                
+                GoToRoom();
             }
-        
+
         }
 
         void UpdateRoomList(List<RoomInfo> list)
         {
+            Debug.Log("Rooms: " + list.Count);
+            
             roomInfolist = list;
 
             foreach (var item in roomItemList)
