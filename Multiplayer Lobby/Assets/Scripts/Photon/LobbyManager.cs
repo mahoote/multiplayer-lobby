@@ -90,6 +90,7 @@ namespace Photon
 
         public void OnClickCreate(string _roomName = "0000000")
         {
+            // TODO: Uncomment code
             // if (roomInputField.text.Length >= 1)
             // {
                 PhotonNetwork.CreateRoom(_roomName, new RoomOptions(){MaxPlayers = maxPlayers, BroadcastPropsChangeToAll = true});

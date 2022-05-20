@@ -13,7 +13,6 @@ public class QuizHandler : MonoBehaviour
     
     void Start()
     {
-     
         Quiz quizInJson = JsonUtility.FromJson<Quiz>(jsonFile.text);
 
         var q = quizInJson.quiz[0];
